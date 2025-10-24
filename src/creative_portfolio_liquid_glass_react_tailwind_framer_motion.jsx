@@ -22,79 +22,127 @@ import { Color } from "three";
 
 // Array of role titles that will be displayed in the typewriter effect
 // These rotate through to show different aspects of Neil's professional identity
-const roles = ["Software Engineer", "Intern", "Tech Enthusiast", "Student"];
+const roles = ["Software Engineering Student", "Software Developer", "AI Enthusiast", "Problem Solver"];
 
 // Portfolio projects data structure
 // Each project contains all necessary information for display in the projects section
 const projects = [
   {
-    title: "Sleep Score Predictor",                    // Project name
-    blurb: "End-to-end ML pipeline to predict sleep quality; scikit-learn + React UI.",  // Brief description
-    stack: ["Python", "scikit-learn", "React", "PostgreSQL"],  // Technologies used
-    links: { demo: "#", repo: "#" },                   // External links (demo and repository)
-    cover: "https://images.unsplash.com/photo-1516245834210-c4c142787335?q=80&w=1200&auto=format&fit=crop"  // Project cover image
+    title: "Bridge Platform",
+    blurb: "Unified platform consolidating student services into a streamlined hub with AI features.",
+    stack: ["React", "Node.js", "PostgreSQL", "AI Integration"],
+    links: { repo: "#" },
+    cover: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop"
   },
   {
-    title: "Virtual Scroll Access System",
-    blurb: "Secure document vault with granular auth, audit logs, and CI testing.",
-    stack: ["Java", "Spring", "Gradle", "PostgreSQL", "Docker"],
-    links: { demo: "#", repo: "#" },
-    cover: "https://images.unsplash.com/photo-1555949963-aa79dcee981d?q=80&w=1200&auto=format&fit=crop"
+    title: "Collaborative Editor",
+    blurb: "POSIX-threaded C server for real-time Markdown edits with atomic commands and versioned broadcasts.",
+    stack: ["C", "POSIX Threads", "Linux", "Makefile"],
+    links: { repo: "https://github.com/NarNeil/Collaborative-Editor" },
+    cover: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1200&auto=format&fit=crop"
   },
   {
     title: "COSMA — Social Constellations",
-    blurb: "Hackathon prototype that connects people via star-themed interests and events.",
+    blurb: "SoftSpark Hackathon 2025 winner - connects people via star-themed interests and events.",
     stack: ["Next.js", "Supabase", "Tailwind", "Framer Motion"],
-    links: { demo: "#", repo: "https://github.com/NarNeil/softspark-hack-2025-depecticons" },
+    links: { repo: "https://github.com/NarNeil/softspark-hack-2025-depecticons" },
     cover: "https://images.unsplash.com/photo-1447430617419-95715602278e?q=80&w=1200&auto=format&fit=crop"
   },
   {
-    title: "Simple Ai TalkBot",
-    blurb: "Realtime conversational bot for Google Meet using OpenAI API",
+    title: "AI Chatbot Platform",
+    blurb: "Multiple chatbot demos with GPT models, UiPath, and Azure services showcasing AI capabilities.",
+    stack: ["Python", "GPT", "UiPath", "Azure"],
+    links: { repo: "#" },
+    cover: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop"
+  },
+  {
+    title: "Simple AI TalkBot",
+    blurb: "Real-time conversational bot for Google Meet using OpenAI API and Selenium automation.",
     stack: ["Python", "Selenium", "OpenAI API"],
-    links: { demo: "#", repo: "https://github.com/NarNeil/Simple-AiTalkBot" },
-    cover: "https://images.unsplash.com/photo-1447430617419-95715602278e?q=80&w=1200&auto=format&fit=crop"
+    links: { repo: "https://github.com/NarNeil/Simple-AiTalkBot" },
+    cover: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=1200&auto=format&fit=crop"
   },
   {
-    title: "SoundBoard",
-    blurb: "Realtime conversational bot for Google Meet using OpenAI API",
-    stack: ["C", "Selenium", "OpenAI API"],
-    links: { demo: "#", repo: "https://github.com/NarNeil/SoundBoard" },
-    cover: "https://images.unsplash.com/photo-1447430617419-95715602278e?q=80&w=1200&auto=format&fit=crop"
+    title: "SoundBall",
+    blurb: "C library for WAV audio editing with memory-safe operations and position-independent flags.",
+    stack: ["C", "GNU Make", "Audio Processing"],
+    links: { repo: "https://github.com/NarNeil/SoundBoard" },
+    cover: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop"
   },
   {
-    title: "Collaborative-Editor",
-    blurb: "Realtime conversational bot for Google Meet using OpenAI API",
-    stack: ["C", "Selenium", "OpenAI API"],
-    links: { demo: "#", repo: "https://github.com/NarNeil/Collaborative-Editor" },
-    cover: "https://images.unsplash.com/photo-1447430617419-95715602278e?q=80&w=1200&auto=format&fit=crop"
+    title: "InkBall Game",
+    blurb: "Java puzzle game with physics mechanics, configurable levels, and JUnit testing via Gradle.",
+    stack: ["Java", "Processing", "Gradle", "JUnit"],
+    links: { repo: "#" },
+    cover: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop"
   },
   {
-    title: "Minesweeper",
-    blurb: "Realtime conversational bot for Google Meet using OpenAI API",
-    stack: ["C", "Selenium", "OpenAI API"],
-    links: { demo: "#", repo: "https://github.com/NarNeil/Minesweeper" },
-    cover: "https://images.unsplash.com/photo-1447430617419-95715602278e?q=80&w=1200&auto=format&fit=crop"
+    title: "Minesweeper Clone",
+    blurb: "Java-based Minesweeper with random mine placement, flagging, timers, and explosion animations.",
+    stack: ["Java", "Processing", "Gradle"],
+    links: { repo: "https://github.com/NarNeil/Minesweeper" },
+    cover: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?q=80&w=1200&auto=format&fit=crop"
   }
 ];
 
 // Professional experience timeline data
 // Chronologically ordered work experience with key achievements
 const experience = [
-  { year: "2025", org: "Enactus USYD • Software Developer @ Bridge", desc: "Led ML + backend integration; shipped a working prototype in 36 hours." },
-  { year: "2024", org: "University of Sydney • Engineering Peer Mentor", desc: "Led ML + backend integration; shipped a working prototype in 36 hours." },
-  { year: "2023", org: "Druid AI • Intern", desc: "Led ML + backend integration; shipped a working prototype in 36 hours." },
-  { year: "2023", org: "Bank Muscat • Automation Intern", desc: "Built internal utilities and automated data flows; improved reporting turnaround." },
-  { year: "2022", org: "HP • Software Intern", desc: "Contributed to QA tooling and CI pipelines; raised automated test coverage." }
+  { 
+    year: "2025", 
+    org: "Enactus USYD • Software Developer @ Bridge", 
+    desc: "Developing a unified platform consolidating student services. Leading cross-functional team to design and prototype features enhancing usability and accessibility."
+  },
+  { 
+    year: "2024–2025", 
+    org: "University of Sydney • Engineering Peer Mentor", 
+    desc: "Guided 10+ first-year students academically and socially. Provided tailored tips building confidence and fostering peer connections."
+  },
+  { 
+    year: "2023", 
+    org: "Druid AI • Internship", 
+    desc: "Developed chatbot demos with GPT models, UiPath, and Azure services. Collaborated with developers to troubleshoot deployment issues and supported sales calls."
+  },
+  { 
+    year: "2023", 
+    org: "Bank Muscat • Automation Intern", 
+    desc: "Gained exposure to Business Process Management (OmniFlow) and automation software (UiPath). Part of AGILE team for account opening automation."
+  },
+  { 
+    year: "2022", 
+    org: "Hewlett-Packard Enterprise • Internship", 
+    desc: "Gained comprehensive understanding of various business models. Actively supported assigned projects leveraging Azure and other software applications."
+  }
 ];
 
-// Skills and capabilities section data
-// Each item represents a core competency with icon, title, and description
-const whatIBuild = [
-  { icon: <Bot className="h-6 w-6" />, title: "AI + Automation", desc: "Process automation, GPT integrations, and smart assistants that save hours." },
-  { icon: <Brain className="h-6 w-6" />, title: "ML & Data", desc: "From preprocessing to modeling to evaluation with reproducible reports." },
-  { icon: <Code2 className="h-6 w-6" />, title: "Full‑stack Software", desc: "APIs, dashboards, and robust testing with CI/CD and containers." }
-];
+// Technical skills section data organized by category
+const technicalSkills = {
+  languages: {
+    title: "Languages",
+    icon: <Code2 className="h-6 w-6" />,
+    skills: ["Python", "Java", "JavaScript", "C", "SQL", "R", "HTML5", "CSS3"]
+  },
+  dataScience: {
+    title: "Data Science & AI",
+    icon: <Brain className="h-6 w-6" />,
+    skills: ["Scikit-learn", "PyTorch", "Pandas", "TensorFlow", "Data Visualization"]
+  },
+  qaAndTesting: {
+    title: "QA & Testing",
+    icon: <Bot className="h-6 w-6" />,
+    skills: ["PyTest", "Selenium", "Coverage Analytics", "JaCoCo"]
+  },
+  devOps: {
+    title: "Dev Ops",
+    icon: <Code2 className="h-6 w-6" />,
+    skills: ["Git", "Git Actions", "REST API Integration"]
+  },
+  databases: {
+    title: "Databases",
+    icon: <Code2 className="h-6 w-6" />,
+    skills: ["PostgreSQL/SQL", "Schema Design", "Supabase"]
+  }
+};
 
 /**
  * Custom Hook: useTypewriter
@@ -271,6 +319,7 @@ const DesktopCardNavbar = ({ activeSection, isOpen, onToggle }) => {
     projects: "#22d3ee",  // Cyan
     experience: "#a3e635", // Green
     build: "#f472b6",     // Pink
+    education: "#fbbf24", // Amber
     contact: "#60a5fa",   // Blue
   };
   
@@ -311,9 +360,17 @@ const DesktopCardNavbar = ({ activeSection, isOpen, onToggle }) => {
       opacity: 0.9
     },
     {
+      label: "Education",
+      icon: <Trophy className="h-5 w-5" />,
+      bgColor: "#271E37",
+      textColor: "#fff",
+      href: "#education",
+      opacity: 0.8
+    },
+    {
       label: "Contact",
       icon: <MessageCircle className="h-5 w-5" />,
-      bgColor: "#170D27", 
+      bgColor: "#170D27",
       textColor: "#fff",
       href: "#contact",
       opacity: 0.85
@@ -494,6 +551,7 @@ const MobileSidebar = ({ isOpen, onClose, activeSection }) => {
     projects: "#22d3ee",  // Cyan
     experience: "#a3e635", // Green
     build: "#f472b6",     // Pink
+    education: "#fbbf24", // Amber
     contact: "#60a5fa",   // Blue
   };
   
@@ -743,13 +801,13 @@ const Hero3D = () => {
             
             {/* Main headline with responsive typography */}
             <h1 className="mt-2 leading-tight font-semibold text-[clamp(2rem,7vw,3.5rem)]">
-              I build intelligent systems
+              Building intelligent systems
               <span className="block text-white/70">that connect people and automate work.</span>
             </h1>
             
             {/* Description paragraph */}
             <p className="mt-4 md:mt-5 text-white/80 max-w-prose text-[clamp(0.95rem,1.2vw,1.05rem)]">
-              Software engineer focused on ML, automation, and full‑stack tooling. I love shipping polished, production‑ready experiences.
+              Third-year Software Engineering student at the University of Sydney with hands-on experience in AI, data science, and automation. Passionate about collaborating in agile teams to deliver high-impact software.
             </p>
             
             {/* Call-to-action buttons */}
@@ -764,10 +822,10 @@ const Hero3D = () => {
             
             {/* Social links and achievements */}
             <div className="mt-6 flex items-center gap-4 text-white/80">
-              <a className="hover:text-white" href="mailto:you@example.com"><Mail className="h-5 w-5" /></a>
-              <a className="hover:text-white" href="https://github.com" target="_blank" rel="noreferrer"><Github className="h-5 w-5" /></a>
-              <a className="hover:text-white" href="https://linkedin.com" target="_blank" rel="noreferrer"><Linkedin className="h-5 w-5" /></a>
-              <span className="inline-flex items-center gap-1 text-[10px] md:text-xs rounded-full border border-white/15 px-2 py-1"><Trophy className="h-3 w-3" /> Hackathon finalist</span>
+              <a className="hover:text-white" href="mailto:narnoli.neil@gmail.com"><Mail className="h-5 w-5" /></a>
+              <a className="hover:text-white" href="https://github.com/NarNeil" target="_blank" rel="noreferrer"><Github className="h-5 w-5" /></a>
+              <a className="hover:text-white" href="https://linkedin.com/in/nnarnoli" target="_blank" rel="noreferrer"><Linkedin className="h-5 w-5" /></a>
+              <span className="inline-flex items-center gap-1 text-[10px] md:text-xs rounded-full border border-white/15 px-2 py-1"><Trophy className="h-3 w-3" /> SoftSpark Hackathon Winner</span>
             </div>
           </div>
           
@@ -869,7 +927,6 @@ const Projects = () => (
                 
                 {/* External links */}
                 <div className="mt-4 flex items-center gap-3">
-                  <a href={p.links.demo} className="inline-flex items-center gap-1 text-sm hover:underline">Live <ExternalLink className="h-4 w-4" /></a>
                   <a href={p.links.repo} className="inline-flex items-center gap-1 text-sm hover:underline">Code <Github className="h-4 w-4" /></a>
                 </div>
               </div>
@@ -936,46 +993,168 @@ const Experience = () => (
 );
 
 /**
- * WhatIBuild Component
- * Displays core competencies and skills in a grid layout
+ * Skills Component
+ * Displays technical skills organized by category
  * 
  * Features:
- * - Three-column grid on desktop, single column on mobile
- * - Icon + title + description for each capability
- * - Glassmorphism cards with consistent styling
+ * - Skills organized by category (Languages, Data Science, QA, DevOps, Databases)
+ * - Responsive grid layout that adapts to screen size
+ * - Skill tags with glassmorphism styling
  * - Staggered animations for visual appeal
  * 
  * Design approach:
- * - Each card contains an icon, title, and description
+ * - Each category card contains icon, title, and skill tags
  * - Icons are contained within glassmorphism containers
+ * - Skill tags use rounded pills with subtle backgrounds
  * - Responsive typography and spacing
  */
-const WhatIBuild = () => (
+const Skills = () => (
   <section id="build" className="relative">
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-20">
-      <SectionTitle eyebrow="Capabilities" title="What I Build" />
+      <SectionTitle eyebrow="Technical Expertise" title="Skills" />
       
-      {/* Three-column grid for capabilities */}
-      <div className="grid gap-5 md:grid-cols-3">
-        {whatIBuild.map((c, i) => (
+      {/* Responsive grid for skill categories */}
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {Object.entries(technicalSkills).map(([key, category], i) => (
           <motion.div 
-            key={c.title} 
+            key={key} 
             initial={{ opacity: 0, y: 20 }} 
             whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
             transition={{ delay: i * 0.05 }}
           >
-            <GlassCard className="p-5">
+            <GlassCard className="p-5 h-full">
               {/* Icon and title row */}
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 border border-white/15">{c.icon}</div>
-                <h3 className="text-base sm:text-lg font-semibold">{c.title}</h3>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 border border-white/15">
+                  {category.icon}
+                </div>
+                <h3 className="text-base sm:text-lg font-semibold">{category.title}</h3>
               </div>
-              {/* Description */}
-              <p className="mt-3 text-white/80 text-sm">{c.desc}</p>
+              
+              {/* Skill tags */}
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <span 
+                    key={skill} 
+                    className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs sm:text-sm text-white/90 hover:bg-white/10 transition-colors"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </GlassCard>
           </motion.div>
         ))}
+      </div>
+    </div>
+  </section>
+);
+
+/**
+ * Education Component
+ * Academic background and achievements
+ * 
+ * Features:
+ * - University education details
+ * - Key subjects and areas of study
+ * - Academic achievements and certifications
+ * - Glassmorphism styling
+ * 
+ * Layout strategy:
+ * - Two-column grid with institution and details
+ * - Responsive design for mobile and desktop
+ */
+const Education = () => (
+  <section id="education" className="relative">
+    <div className="mx-auto max-w-6xl px-4 py-12 md:py-20">
+      <SectionTitle eyebrow="Academic Background" title="Education" />
+      
+      <div className="space-y-5">
+        {/* University of Sydney */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0 }}
+        >
+          <GlassCard className="p-5 md:p-6">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-4">
+              <div className="flex-1">
+                <h3 className="text-xl md:text-2xl font-semibold">University of Sydney</h3>
+                <p className="mt-1 text-white/80">Bachelor of Software Engineering (Honours)</p>
+                <p className="mt-2 text-sm text-white/70">
+                  <span className="font-medium">Key Units:</span> Systems Programming, Data Structures & Algorithms, Analysis and Design of Web Info Systems, Object-Oriented Programming, Multi-Disciplinary Engineering
+                </p>
+              </div>
+              <div className="text-sm text-white/60 md:text-right">
+                <p>Australia</p>
+                <p className="mt-1">Expected 2026</p>
+              </div>
+            </div>
+          </GlassCard>
+        </motion.div>
+
+        {/* Cambridge International */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.05 }}
+        >
+          <GlassCard className="p-5 md:p-6">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-4">
+              <div className="flex-1">
+                <h3 className="text-xl md:text-2xl font-semibold">Cambridge International A & AS Level (AIPS)</h3>
+                <p className="mt-1 text-white/80">Muscat, Oman</p>
+                <p className="mt-2 text-sm text-white/70">
+                  <span className="font-medium">Subjects:</span> Computer Science, Economics, Maths, English, Physics
+                </p>
+              </div>
+              <div className="text-sm text-white/60 md:text-right">
+                <p>Completed</p>
+              </div>
+            </div>
+          </GlassCard>
+        </motion.div>
+
+        {/* Certifications */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+        >
+          <GlassCard className="p-5 md:p-6">
+            <h3 className="text-lg md:text-xl font-semibold mb-3">Certifications & Awards</h3>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <Trophy className="h-5 w-5 text-white/60 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-white/90"><span className="font-medium">IBM (Coursera):</span> Python for Data Science and Artificial Intelligence</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Trophy className="h-5 w-5 text-white/60 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-white/90"><span className="font-medium">University of Michigan (Coursera):</span> Python Functions, Files, and Dictionaries</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Trophy className="h-5 w-5 text-white/60 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-white/90"><span className="font-medium">SoftSpark Hackathon 2025:</span> Winner - National Bank of Oman Hackathon</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Trophy className="h-5 w-5 text-white/60 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-white/90"><span className="font-medium">Dar Al Atta English Writing Competition:</span> 2nd Runner-up</p>
+                </div>
+              </div>
+            </div>
+          </GlassCard>
+        </motion.div>
       </div>
     </div>
   </section>
@@ -1000,22 +1179,21 @@ const WhatIBuild = () => (
 const Contact = () => (
   <section id="contact" className="relative">
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-20">
-      <SectionTitle eyebrow="Say hi" title="Let's collaborate" />
+      <SectionTitle eyebrow="Get in touch" title="Let's collaborate" />
       
       <GlassCard className="p-5 md:p-8">
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           {/* Left column: Contact information */}
           <div>
             <p className="text-white/80 text-sm md:text-base">
-              Have an idea, a project, or a role where I can help? I'm keen to chat.
-              Use the form or email me directly.
+              Seeking a software engineering internship or entry-level role. Have an idea, project, or opportunity? I'm keen to chat about collaborating in agile teams to deliver high-impact software.
             </p>
             
             {/* Social media links */}
             <div className="mt-5 flex flex-wrap items-center gap-3 text-white/90">
-              <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="mailto:you@example.com"><Mail className="h-4 w-4"/> you@example.com</a>
-              <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="https://github.com" target="_blank" rel="noreferrer"><Github className="h-4 w-4"/> GitHub</a>
-              <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="https://linkedin.com" target="_blank" rel="noreferrer"><Linkedin className="h-4 w-4"/> LinkedIn</a>
+              <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="mailto:narnoli.neil@gmail.com"><Mail className="h-4 w-4"/> narnoli.neil@gmail.com</a>
+              <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="https://github.com/NarNeil" target="_blank" rel="noreferrer"><Github className="h-4 w-4"/> GitHub</a>
+              <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="https://linkedin.com/in/nnarnoli" target="_blank" rel="noreferrer"><Linkedin className="h-4 w-4"/> LinkedIn</a>
             </div>
           </div>
           
@@ -1177,6 +1355,7 @@ function ParticlesOverlay({ active }) {
     projects: "#22d3ee",  // Cyan
     experience: "#a3e635", // Green
     build: "#f472b6",     // Pink
+    education: "#fbbf24", // Amber
     contact: "#60a5fa",   // Blue
   };
   
@@ -1325,7 +1504,7 @@ function FrameUpdater({ onFrame }) {
  */
 export default function PortfolioSite() {
   // Track which section is currently active for particle color changes
-  const active = useActiveSection(["home", "projects", "experience", "build", "contact"]);
+  const active = useActiveSection(["home", "projects", "experience", "build", "education", "contact"]);
   
   return (
     <div className="min-h-screen bg-[#0f0f16] text-white selection:bg-indigo-500/40">
@@ -1343,7 +1522,8 @@ export default function PortfolioSite() {
         <Hero3D />        {/* Hero section with 3D orb and typewriter */}
         <Projects />      {/* Portfolio projects grid */}
         <Experience />    {/* Professional experience timeline */}
-        <WhatIBuild />    {/* Skills and capabilities */}
+        <Skills />        {/* Technical skills organized by category */}
+        <Education />     {/* Education and certifications */}
         <Contact />       {/* Contact form and information */}
       </main>
       
