@@ -8,6 +8,9 @@ import PortfolioSite from './creative_portfolio_liquid_glass_react_tailwind_fram
 // Import the global CSS styles that include Tailwind CSS directives and custom styles
 import './index.css'
 
+// Import AI chat widget styles
+import './ai-chat.css'
+
 // 
 // This is the entry point of the React application.
 // ReactDOM.createRoot() creates a React root that can render React elements.

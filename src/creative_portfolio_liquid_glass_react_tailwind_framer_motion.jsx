@@ -9,13 +9,11 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 // These provide consistent, accessible icons throughout the portfolio
 import { Github, Linkedin, Mail, ExternalLink, Trophy, Code2, Bot, Brain, Send, ArrowRight, Menu, X, Download, ArrowUpRight, Home, Briefcase, User, MessageCircle } from "lucide-react";
 
-// Three.js React integration - enables 3D graphics in React
-// Canvas: 3D scene container, useFrame: animation loop hook
-import { Canvas, useFrame } from "@react-three/fiber";
+// AI Chat component
+import AIChat from "./AIChat";
 
-// Three.js helpers and materials for enhanced 3D effects
-// Float: floating animation, MeshDistortMaterial: liquid-like distortion, PresentationControls: mouse interaction
-import { Float, MeshDistortMaterial, PresentationControls, Environment, Stars } from "@react-three/drei";
+// Three.js React integration - for particle system
+import { Canvas, useFrame } from "@react-three/fiber";
 
 // Three.js core - Color class for color manipulation
 import { Color } from "three";
@@ -722,146 +720,91 @@ const Navbar = ({ activeSection }) => {
 };
 
 /**
- * LiquidOrb Component
- * 3D animated orb with liquid-like distortion effects
- * 
- * Technical implementation:
- * - Uses Three.js icosahedron geometry for smooth sphere
- * - MeshDistortMaterial creates liquid-like surface distortion
- * - Float component adds gentle floating animation
- * - Respects user's motion preferences for accessibility
- * 
- * @param {boolean} reducedMotion - Whether to reduce animations for accessibility
- */
-function LiquidOrb({ reducedMotion = false }) {
-  return (
-    <Float 
-      speed={reducedMotion ? 0 : 1} 
-      rotationIntensity={reducedMotion ? 0 : 0.6} 
-      floatIntensity={reducedMotion ? 0 : 1.2}
-    >
-      <mesh castShadow receiveShadow>
-        {/* Icosahedron geometry provides smooth sphere with good performance */}
-        <icosahedronGeometry args={[1.4, 32]} />
-        {/* MeshDistortMaterial creates the liquid glass effect */}
-        <MeshDistortMaterial
-          transparent
-          opacity={0.8}                    // Semi-transparent for glass effect
-          roughness={0.05}                 // Very smooth surface
-          metalness={0.2}                  // Slight metallic reflection
-          color="#8987f5"                  // Purple color matching theme
-          distort={reducedMotion ? 0 : 0.35}  // Liquid distortion amount
-          speed={reducedMotion ? 0 : 1.9}     // Animation speed
-        />
-      </mesh>
-    </Float>
-  );
-}
-
-/**
  * Hero3D Component
- * Main hero section with 3D animated orb and typewriter effect
+ * Main hero section with introduction and gradient effects
  * 
  * Features:
- * - Responsive grid layout (single column on mobile, two columns on desktop)
- * - Typewriter effect cycling through professional roles
- * - Interactive 3D orb with mouse controls
- * - Accessibility considerations (respects reduced motion preferences)
- * - Gradient background effects for visual depth
+ * - Centered layout with gradient background
+ * - Professional introduction and call-to-action buttons
+ * - Social links and achievements
+ * - Data attributes for AI chat integration
  * 
  * Technical implementation:
- * - Three.js Canvas for 3D rendering
- * - Custom useTypewriter hook for text animation
  * - Responsive design with CSS Grid and clamp() functions
- * - Motion detection for accessibility
+ * - Smooth animations and transitions
+ * - Integration points for AI chat widget
  */
 const Hero3D = () => {
-  // Get typewriter text from custom hook
-  const typed = useTypewriter(roles);
-  
-  // Detect user's motion preferences for accessibility
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    const handler = (e) => setReduced(e.matches);
-    mq.addEventListener?.("change", handler);
-    return () => mq.removeEventListener?.("change", handler);
-  }, []);
   
   return (
     <section id="home" className="relative overflow-hidden">
-      <div className="relative mx-auto max-w-6xl px-4 pt-24 md:pt-36 pb-8 md:pb-14">
-        {/* Responsive grid layout */}
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* Left column: Text content */}
-          <div>
-            {/* Section label */}
-            <p className="text-white/60 uppercase tracking-widest text-[10px] md:text-xs">Portfolio</p>
-            
-            {/* Main headline with responsive typography */}
-            <h1 className="mt-2 leading-tight font-semibold text-[clamp(2rem,7vw,3.5rem)]">
-              Building intelligent systems
-              <span className="block text-white/70">that connect people and automate work.</span>
-            </h1>
-            
-            {/* Description paragraph */}
-            <p className="mt-4 md:mt-5 text-white/80 max-w-prose text-[clamp(0.95rem,1.2vw,1.05rem)]">
-              Third-year Software Engineering student at the University of Sydney with hands-on experience in AI, data science, and automation. Passionate about collaborating in agile teams to deliver high-impact software.
-            </p>
-            
-            {/* Call-to-action buttons */}
-            <div className="mt-5 md:mt-6 flex flex-wrap items-center gap-3">
-              <a href="#projects" className="group inline-flex items-center gap-2 rounded-full bg-white text-slate-900 px-4 py-2 md:px-5 md:py-2.5 font-medium">
-                View Projects <ArrowRight className="h-4 w-4 transition -translate-x-0 group-hover:translate-x-0.5" />
-              </a>
-              <a href="#contact" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 md:px-5 md:py-2.5">
-                Contact <Send className="h-4 w-4" />
-              </a>
-            </div>
-            
-            {/* Social links and achievements */}
-            <div className="mt-6 flex items-center gap-4 text-white/80">
-              <a className="hover:text-white" href="mailto:narnoli.neil@gmail.com"><Mail className="h-5 w-5" /></a>
-              <a className="hover:text-white" href="https://github.com/NarNeil" target="_blank" rel="noreferrer"><Github className="h-5 w-5" /></a>
-              <a className="hover:text-white" href="https://linkedin.com/in/nnarnoli" target="_blank" rel="noreferrer"><Linkedin className="h-5 w-5" /></a>
-              <span className="inline-flex items-center gap-1 text-[10px] md:text-xs rounded-full border border-white/15 px-2 py-1"><Trophy className="h-3 w-3" /> SoftSpark Hackathon Winner</span>
-            </div>
+      <div className="relative mx-auto max-w-6xl px-4 pt-24 md:pt-36 pb-16 md:pb-24">
+        {/* Centered content */}
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Section label */}
+          <p className="text-white/60 uppercase tracking-widest text-[10px] md:text-xs">Portfolio</p>
+          
+          {/* Main headline with responsive typography */}
+          <h1 className="mt-2 leading-tight font-semibold text-[clamp(2.5rem,8vw,4.5rem)]">
+            Building intelligent systems
+            <span className="block text-white/70 mt-2">that connect people and automate work.</span>
+          </h1>
+          
+          {/* Description paragraph */}
+          <p className="mt-6 md:mt-8 text-white/80 max-w-2xl mx-auto text-[clamp(1rem,1.3vw,1.15rem)] leading-relaxed">
+            Third-year Software Engineering student at the University of Sydney with hands-on experience in AI, data science, and automation. Passionate about collaborating in agile teams to deliver high-impact software.
+          </p>
+          
+          {/* Call-to-action buttons with data attributes */}
+          <div className="mt-8 md:mt-10 flex flex-wrap items-center justify-center gap-4">
+            <a 
+              href="#projects" 
+              data-projects
+              className="group inline-flex items-center gap-2 rounded-full bg-white text-slate-900 px-6 py-3 md:px-7 md:py-3.5 font-medium text-base hover:bg-white/90 transition"
+            >
+              View Projects <ArrowRight className="h-5 w-5 transition -translate-x-0 group-hover:translate-x-0.5" />
+            </a>
+            <a 
+              href="#contact" 
+              data-contact
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 md:px-7 md:py-3.5 text-base hover:border-white/40 hover:bg-white/5 transition"
+            >
+              Contact <Send className="h-5 w-5" />
+            </a>
+            <button 
+              data-download-cv
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 md:px-7 md:py-3.5 text-base hover:border-white/40 hover:bg-white/5 transition"
+              onClick={() => {
+                console.log('Download CV clicked - Add your CV link here');
+                // window.open('/path-to-your-cv.pdf', '_blank');
+              }}
+            >
+              <Download className="h-5 w-5" /> Download CV
+            </button>
           </div>
           
-          {/* Right column: 3D orb */}
-          <div className="relative h-[320px] sm:h-[380px] md:h-[460px] lg:h-[520px]">
-            {/* Gradient background effect */}
-            <div className="absolute -top-20 -left-24 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-indigo-500/25 via-fuchsia-500/25 to-cyan-400/25 blur-3xl" />
-            
-            {/* Three.js Canvas for 3D rendering */}
-            <Canvas 
-              dpr={[1, 1.8]} 
-              shadows 
-              camera={{ position: [0, 0, 4.2], fov: 45 }} 
-              gl={{ antialias: true }}
+          {/* Social links and achievements */}
+          <div className="mt-8 flex items-center justify-center gap-5 text-white/80">
+            <a 
+              className="hover:text-white transition" 
+              href="mailto:narnoli.neil@gmail.com"
+              data-email="narnoli.neil@gmail.com"
             >
-              {/* Starfield background (only if motion is not reduced) */}
-              {!reduced && <Stars radius={40} depth={50} count={800} factor={2} fade />}
-              
-              {/* Lighting setup */}
-              <ambientLight intensity={0.6} />
-              <directionalLight position={[4, 5, 3]} intensity={0.9} castShadow />
-              
-              {/* Interactive controls for the orb */}
-              <PresentationControls enabled={!reduced} global polar={[0, Math.PI / 8]} azimuth={[-Math.PI / 6, Math.PI / 6]}>
-                <LiquidOrb reducedMotion={reduced} />
-              </PresentationControls>
-              
-              {/* Environment lighting */}
-              <Environment preset="city" />
-            </Canvas>
-            
-            {/* Typewriter text overlay */}
-            <div className="absolute left-1/2 top-4 -translate-x-1/2 rounded-full border border-white/15 bg-white/10 backdrop-blur-xl px-3 py-1 text-xs md:text-sm">
-              Currently: <span className="font-medium">{typed}</span>
-            </div>
+              <Mail className="h-5 w-5" />
+            </a>
+            <a className="hover:text-white transition" href="https://github.com/NarNeil" target="_blank" rel="noreferrer">
+              <Github className="h-5 w-5" />
+            </a>
+            <a className="hover:text-white transition" href="https://linkedin.com/in/nnarnoli" target="_blank" rel="noreferrer">
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <span className="inline-flex items-center gap-2 text-sm rounded-full border border-white/15 px-3 py-1.5">
+              <Trophy className="h-4 w-4" /> SoftSpark Hackathon Winner
+            </span>
           </div>
+          
+          {/* Gradient effects */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-500/20 via-fuchsia-500/20 to-cyan-400/20 blur-3xl -z-10 pointer-events-none" />
         </div>
       </div>
     </section>
@@ -1529,6 +1472,9 @@ export default function PortfolioSite() {
       
       {/* Footer */}
       <Footer />
+      
+      {/* AI Chat Widget */}
+      <AIChat />
     </div>
   );
 }
