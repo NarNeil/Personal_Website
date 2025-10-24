@@ -1473,8 +1473,8 @@ export default function PortfolioSite() {
       {/* Footer */}
       <Footer />
       
-      {/* AI Chat Widget */}
-      <AIChat />
+      {/* AI Chat Widget - colors change based on active section */}
+      <AIChat activeSection={active} />
     </div>
   );
 }

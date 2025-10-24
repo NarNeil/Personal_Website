@@ -1,6 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const AIChat = () => {
+const AIChat = ({ activeSection = 'home' }) => {
+  // Color mapping for each section (matches particle system)
+  const colorMap = {
+    home: "#8b5cf6",      // Purple
+    projects: "#22d3ee",  // Cyan
+    experience: "#a3e635", // Green
+    build: "#f472b6",     // Pink
+    education: "#fbbf24", // Amber
+    contact: "#60a5fa",   // Blue
+  };
+  
+  const currentColor = colorMap[activeSection] || "#8b5cf6";
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { from: 'bot', text: "Hey! I'm Neil's AI assistant. Need a quick tour?" },
@@ -138,13 +149,30 @@ const AIChat = () => {
         className="nn-ai-fab"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Chat with Neil's AI"
+        style={{
+          background: `linear-gradient(135deg, ${currentColor}4D, ${currentColor}40)`,
+          borderColor: `${currentColor}66`,
+          boxShadow: `0 8px 32px ${currentColor}4D, 0 0 0 1px rgba(255,255,255,.1) inset`
+        }}
       >
         💬
       </button>
 
       {/* Chat card */}
-      <div className={`nn-ai-card ${!isOpen ? 'is-closed' : ''}`}>
-        <div className="nn-border"></div>
+      <div 
+        className={`nn-ai-card ${!isOpen ? 'is-closed' : ''}`}
+        style={{
+          background: `linear-gradient(180deg, ${currentColor}14, ${currentColor}08)`,
+          borderColor: `${currentColor}4D`,
+          boxShadow: `0 8px 32px ${currentColor}40, 0 0 0 1px rgba(255,255,255,.05) inset`
+        }}
+      >
+        <div 
+          className="nn-border"
+          style={{
+            '--current-color': currentColor
+          }}
+        ></div>
         
         {/* Particles */}
         <div className="nn-particles">
@@ -163,7 +191,15 @@ const AIChat = () => {
 
         {/* Header */}
         <div className="nn-hdr">
-          <div className="nn-ava">AI</div>
+          <div 
+            className="nn-ava"
+            style={{
+              background: `linear-gradient(140deg, ${currentColor}, ${currentColor}CC)`,
+              boxShadow: `0 0 0 1px rgba(255,255,255,.1) inset, 0 4px 12px ${currentColor}40`
+            }}
+          >
+            AI
+          </div>
           <div className="nn-titles">
             <strong>Neil's Assistant</strong>
             <div className="nn-status">
@@ -198,6 +234,10 @@ const AIChat = () => {
               key={action.id}
               className="nn-chip"
               onClick={() => runAction(action.id)}
+              style={{
+                background: `linear-gradient(135deg, ${currentColor}26, ${currentColor}1A)`,
+                borderColor: `${currentColor}4D`
+              }}
             >
               {action.label}
             </button>
@@ -205,7 +245,12 @@ const AIChat = () => {
         </div>
 
         {/* Input */}
-        <div className="nn-input">
+        <div 
+          className="nn-input"
+          style={{
+            borderTopColor: `${currentColor}33`
+          }}
+        >
           <input
             ref={inputRef}
             type="text"
@@ -214,8 +259,18 @@ const AIChat = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
+            style={{
+              borderColor: `${currentColor}4D`
+            }}
           />
-          <button onClick={handleSend} aria-label="Send">
+          <button 
+            onClick={handleSend} 
+            aria-label="Send"
+            style={{
+              background: `linear-gradient(135deg, ${currentColor}66, ${currentColor}59)`,
+              borderColor: `${currentColor}66`
+            }}
+          >
             <svg width="18" height="18" viewBox="0 0 24 24">
               <path fill="currentColor" d="m2 21 21-9L2 3v7l15 2-15 2v7Z" />
             </svg>
