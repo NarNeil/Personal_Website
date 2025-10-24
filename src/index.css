@@ -1,0 +1,45 @@
+/* 
+  Tailwind CSS Directives:
+  These three directives import Tailwind's base styles, component classes, and utility classes.
+  They must be included in this order for Tailwind to work properly.
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  CSS Reset - Universal Box Sizing:
+  This ensures all elements use border-box sizing by default.
+  border-box includes padding and border in the element's total width and height,
+  making it easier to create consistent layouts without unexpected sizing issues.
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 
+  Smooth Scrolling Behavior:
+  This enables smooth scrolling when users click on anchor links (like navigation links).
+  Instead of jumping instantly to sections, the page will smoothly scroll to them.
+  This creates a more polished user experience, especially on longer pages.
+*/
+html {
+  scroll-behavior: smooth;
+}
+
+/* 
+  Font Stack and Rendering Optimizations:
+  This sets up a comprehensive font stack that prioritizes system fonts for better performance.
+  The font stack goes from most specific (Apple system fonts) to more generic fallbacks.
+  
+  Font smoothing properties improve text rendering:
+  -webkit-font-smoothing: antialiased - Makes text appear smoother on WebKit browsers (Chrome, Safari)
+  -moz-osx-font-smoothing: grayscale - Similar optimization for Firefox on macOS
+*/
+body {
+  font-family: 'Inter', 'Poppins', 'Nunito Sans', 'Open Sans', 'Lato', 'Rubik', 'Manrope', 'Work Sans';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

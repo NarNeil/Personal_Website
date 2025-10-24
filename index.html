@@ -1,0 +1,49 @@
+<!doctype html>
+<!-- 
+  This is the main HTML document that serves as the entry point for the React portfolio application.
+  It defines the basic HTML structure and loads the React application.
+-->
+<html lang="en">
+  <head>
+    <!-- 
+      Meta charset declaration ensures proper character encoding for international characters.
+      UTF-8 is the standard encoding that supports all Unicode characters.
+    -->
+    <meta charset="UTF-8" />
+    
+    <!-- 
+      Favicon link that points to Vite's default SVG icon.
+      This appears in browser tabs and bookmarks.
+    -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
+    <!-- 
+      Viewport meta tag is crucial for responsive design.
+      It tells the browser how to control the page's dimensions and scaling on mobile devices.
+      width=device-width: sets the width to match the device's screen width
+      initial-scale=1.0: sets the initial zoom level to 100%
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- 
+      Page title that appears in browser tabs and search engine results.
+      Describes this as Neil's portfolio with a "Liquid Glass" theme.
+    -->
+    <title>Neil Narnoli's Portfolio</title>
+  </head>
+  <body>
+    <!-- 
+      The root div is where React will mount the entire application.
+      ReactDOM.createRoot() in main.jsx will attach the React app to this element.
+      This is the single point of entry for all React components.
+    -->
+    <div id="root"></div>
+    
+    <!-- 
+      This script tag loads the main.jsx file which contains the React application entry point.
+      type="module" allows us to use ES6 import/export syntax.
+      The script is loaded after the root div exists, ensuring React can mount properly.
+    -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
