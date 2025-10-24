@@ -73,6 +73,34 @@
 
 /* log */
 .nn-body{ position:relative; z-index:1; padding:6px 10px 4px 10px; max-height:380px; overflow:auto; }
+
+/* Custom scrollbar for chat body */
+.nn-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nn-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin: 4px;
+}
+
+.nn-body::-webkit-scrollbar-thumb {
+  background: var(--chat-scrollbar-color, rgba(139, 92, 246, 0.7));
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+}
+
+.nn-body::-webkit-scrollbar-thumb:hover {
+  filter: brightness(1.3);
+}
+
+/* Firefox */
+.nn-body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--chat-scrollbar-color, rgba(139, 92, 246, 0.7)) rgba(0, 0, 0, 0.2);
+}
 .nn-bubble{ max-width:82%; padding:10px 12px; margin:8px 0; border-radius:14px; backdrop-filter: blur(8px); }
 .nn-bot{ 
   background:linear-gradient(135deg, rgba(139,92,246,.12), rgba(167,139,250,.08)); 
@@ -107,31 +135,294 @@
   border-color: rgba(139,92,246,.5);
 }
 
-.nn-input{ display:flex; gap:8px; padding:12px; padding-top:8px; border-top:1px solid rgba(139,92,246,.2); }
+.nn-input{ 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  padding:12px; 
+  padding-top:8px; 
+  border-top:1px solid rgba(139,92,246,.2); 
+  position: relative;
+}
+
+/* Animated input wrapper */
+.nn-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Animated border layers */
+.nn-input-glow,
+.nn-input-border,
+.nn-input-white,
+.nn-input-dark {
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nn-input-glow {
+  filter: blur(25px);
+  opacity: 0.6;
+  inset: -12px;
+}
+
+.nn-input-white {
+  filter: blur(3px);
+  opacity: 0.8;
+  inset: 0px;
+}
+
+.nn-input-border {
+  filter: blur(1px);
+  opacity: 0.9;
+  inset: 1px;
+}
+
+.nn-input-dark {
+  inset: 0px;
+  opacity: 0.7;
+}
+
+/* Rotating gradient animations */
+.nn-input-glow::before,
+.nn-input-white::before,
+.nn-input-border::before,
+.nn-input-dark::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  transition: transform 2s ease;
+}
+
+.nn-input-glow::before {
+  transform: translate(-50%, -50%) rotate(60deg);
+  filter: brightness(2);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0),
+    var(--current-color, #8b5cf6) 8%,
+    rgba(0, 0, 0, 0) 28%,
+    rgba(0, 0, 0, 0) 50%,
+    var(--current-color, #8b5cf6) 62%,
+    rgba(0, 0, 0, 0) 82%
+  );
+}
+
+.nn-input-white::before {
+  transform: translate(-50%, -50%) rotate(83deg);
+  filter: brightness(2.2);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    var(--current-color, #8b5cf6),
+    rgba(0, 0, 0, 0) 15%,
+    rgba(0, 0, 0, 0) 50%,
+    var(--current-color, #8b5cf6),
+    rgba(0, 0, 0, 0) 65%
+  );
+}
+
+.nn-input-border::before {
+  transform: translate(-50%, -50%) rotate(70deg);
+  filter: brightness(1.8);
+  background-image: conic-gradient(
+    transparent,
+    var(--current-color, #8b5cf6) 10%,
+    transparent 22%,
+    transparent 50%,
+    var(--current-color, #8b5cf6) 65%,
+    transparent 75%
+  );
+}
+
+.nn-input-dark::before {
+  transform: translate(-50%, -50%) rotate(82deg);
+  filter: brightness(1.5);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0),
+    var(--current-color, #8b5cf6),
+    rgba(0, 0, 0, 0) 18%,
+    rgba(0, 0, 0, 0) 50%,
+    var(--current-color, #8b5cf6),
+    rgba(0, 0, 0, 0) 68%
+  );
+}
+
+/* Hover animations */
+.nn-input-wrapper:hover .nn-input-dark::before {
+  transform: translate(-50%, -50%) rotate(-98deg);
+}
+
+.nn-input-wrapper:hover .nn-input-glow::before {
+  transform: translate(-50%, -50%) rotate(-120deg);
+}
+
+.nn-input-wrapper:hover .nn-input-white::before {
+  transform: translate(-50%, -50%) rotate(-97deg);
+}
+
+.nn-input-wrapper:hover .nn-input-border::before {
+  transform: translate(-50%, -50%) rotate(-110deg);
+}
+
+/* Focus animations */
+.nn-input-wrapper:focus-within .nn-input-dark::before {
+  transform: translate(-50%, -50%) rotate(442deg);
+  transition: transform 4s ease;
+}
+
+.nn-input-wrapper:focus-within .nn-input-glow::before {
+  transform: translate(-50%, -50%) rotate(420deg);
+  transition: transform 4s ease;
+}
+
+.nn-input-wrapper:focus-within .nn-input-white::before {
+  transform: translate(-50%, -50%) rotate(443deg);
+  transition: transform 4s ease;
+}
+
+.nn-input-wrapper:focus-within .nn-input-border::before {
+  transform: translate(-50%, -50%) rotate(430deg);
+  transition: transform 4s ease;
+}
+
+/* Color accent mask */
+.nn-input-mask {
+  pointer-events: none;
+  width: 50px;
+  height: 30px;
+  position: absolute;
+  background: var(--current-color, #cf30aa);
+  top: 50%;
+  left: 25px;
+  transform: translateY(-50%);
+  filter: blur(30px);
+  opacity: 0.8;
+  transition: opacity 2s ease, filter 2s ease;
+  z-index: 1;
+}
+
+.nn-input-wrapper:hover .nn-input-mask {
+  opacity: 0.4;
+  filter: blur(40px);
+}
+
+.nn-input-wrapper:focus-within .nn-input-mask {
+  opacity: 0.2;
+}
+
+/* Main input container */
+.nn-input-main {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
 .nn-input input{
-  flex:1; border-radius:12px; border:1px solid rgba(139,92,246,.3);
-  background: rgba(15,15,22,.7); color:var(--ai-text);
-  padding:10px 14px; outline:none;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset;
-  transition: border-color .2s ease, box-shadow .2s ease;
+  background: linear-gradient(135deg, rgba(25,20,35,.75), rgba(30,25,40,.65));
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.12);
+  width: 100%;
+  height: 52px;
+  border-radius: 26px;
+  color: white;
+  padding: 0 58px 0 22px;
+  font-size: 15px;
+  position: relative;
+  z-index: 1;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.2), 0 4px 12px rgba(0,0,0,.15);
+  transition: all .3s ease;
 }
-.nn-input input:focus{
-  border-color: rgba(139,92,246,.5);
-  box-shadow: 0 0 0 3px rgba(139,92,246,.15), 0 0 0 1px rgba(255,255,255,.05) inset;
+
+.nn-input input::placeholder {
+  color: rgba(192, 185, 192, 0.8);
 }
-.nn-input button{
-  border-radius:12px; border:1px solid rgba(139,92,246,.4);
-  background: linear-gradient(135deg, rgba(139,92,246,.4), rgba(167,139,250,.35));
-  color:var(--ai-text); padding:10px 12px; cursor:pointer;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.1) inset;
-  transition: all .2s ease;
+
+.nn-input input:hover {
+  background: linear-gradient(135deg, rgba(30,25,40,.8), rgba(35,30,45,.7));
+  border-color: rgba(255,255,255,.18);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.25), 0 6px 16px rgba(0,0,0,.2);
 }
-.nn-input button:hover{
-  background: linear-gradient(135deg, rgba(139,92,246,.5), rgba(167,139,250,.45));
-  box-shadow: 0 4px 12px rgba(139,92,246,.3), 0 0 0 1px rgba(255,255,255,.15) inset;
-  transform: translateY(-1px);
+
+.nn-input input:focus {
+  outline: none;
+  background: linear-gradient(135deg, rgba(35,30,45,.85), rgba(40,35,50,.75));
+  border-color: rgba(255,255,255,.22);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25), 0 0 0 2px var(--current-color, #8b5cf6)33;
+}
+
+/* Send button styled as filter icon */
+.nn-send-btn {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(22,19,41,.9), rgba(29,27,75,.85));
+  border: 1px solid rgba(255,255,255,.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+.nn-send-btn:hover {
+  transform: translateY(-50%) scale(1.08);
+  background: linear-gradient(135deg, rgba(29,27,75,.95), rgba(35,32,85,.9));
+  box-shadow: 0 6px 16px rgba(0,0,0,.35), 0 0 20px var(--current-color, #8b5cf6)40;
+}
+
+.nn-send-btn-border {
+  position: absolute;
+  inset: -1px;
+  border-radius: 20px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nn-send-btn-border::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  width: 400px;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  filter: brightness(1.35);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0),
+    #3d3a4f,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0) 50%,
+    #3d3a4f,
+    rgba(0, 0, 0, 0) 100%
+  );
+  animation: nn-rotate-btn 4s linear infinite;
+}
+
+@keyframes nn-rotate-btn {
+  100% {
+    transform: translate(-50%, -50%) rotate(450deg);
+  }
 }
 
 /* small screens */

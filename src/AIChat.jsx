@@ -211,10 +211,27 @@ const AIChat = ({ activeSection = 'home' }) => {
           </button>
         </div>
 
-        {/* Message log */}
-        <div className="nn-body" ref={logRef} role="log" aria-live="polite">
+         {/* Message log */}
+         <div 
+           className="nn-body" 
+           ref={logRef} 
+           role="log" 
+           aria-live="polite"
+           style={{
+             '--current-color': currentColor,
+             '--chat-scrollbar-color': currentColor
+           }}
+         >
           {messages.map((msg, i) => (
-            <div key={i} className={`nn-bubble ${msg.from === 'user' ? 'nn-user' : 'nn-bot'}`}>
+            <div 
+              key={i} 
+              className={`nn-bubble ${msg.from === 'user' ? 'nn-user' : 'nn-bot'}`}
+              style={msg.from === 'user' ? {
+                background: `linear-gradient(135deg, ${currentColor}35, ${currentColor}28)`,
+                border: `1px solid ${currentColor}55`,
+                boxShadow: `inset 0 0 12px ${currentColor}22, 0 2px 8px rgba(0,0,0,.15)`
+              } : {}}
+            >
               <p>{msg.text}</p>
             </div>
           ))}
@@ -244,37 +261,49 @@ const AIChat = ({ activeSection = 'home' }) => {
           ))}
         </div>
 
-        {/* Input */}
+        {/* Input with animated borders */}
         <div 
           className="nn-input"
           style={{
-            borderTopColor: `${currentColor}33`
+            borderTopColor: `${currentColor}33`,
+            '--current-color': currentColor
           }}
         >
-          <input
-            ref={inputRef}
-            type="text"
-            placeholder="Ask about projects, CV, or contact…"
-            aria-label="Message Neil's AI"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={handleKeyDown}
-            style={{
-              borderColor: `${currentColor}4D`
-            }}
-          />
-          <button 
-            onClick={handleSend} 
-            aria-label="Send"
-            style={{
-              background: `linear-gradient(135deg, ${currentColor}66, ${currentColor}59)`,
-              borderColor: `${currentColor}66`
-            }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24">
-              <path fill="currentColor" d="m2 21 21-9L2 3v7l15 2-15 2v7Z" />
-            </svg>
-          </button>
+          <div className="nn-input-wrapper">
+            {/* Animated border layers */}
+            <div className="nn-input-glow"></div>
+            <div className="nn-input-dark"></div>
+            <div className="nn-input-white"></div>
+            <div className="nn-input-border"></div>
+            
+            {/* Pink accent mask */}
+            <div className="nn-input-mask"></div>
+            
+            {/* Main input container */}
+            <div className="nn-input-main">
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Ask about projects, CV, or contact…"
+                aria-label="Message Neil's AI"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
+              
+              {/* Send button with border animation */}
+              <button 
+                className="nn-send-btn"
+                onClick={handleSend} 
+                aria-label="Send"
+              >
+                <div className="nn-send-btn-border"></div>
+                <svg width="18" height="18" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="m2 21 21-9L2 3v7l15 2-15 2v7Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </>

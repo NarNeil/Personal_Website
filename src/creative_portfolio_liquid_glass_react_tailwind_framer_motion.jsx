@@ -771,19 +771,9 @@ const Hero3D = () => {
             >
               Contact <Send className="h-5 w-5" />
             </a>
-            <button 
-              data-download-cv
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 md:px-7 md:py-3.5 text-base hover:border-white/40 hover:bg-white/5 transition"
-              onClick={() => {
-                console.log('Download CV clicked - Add your CV link here');
-                // window.open('/path-to-your-cv.pdf', '_blank');
-              }}
-            >
-              <Download className="h-5 w-5" /> Download CV
-            </button>
           </div>
           
-          {/* Social links and achievements */}
+          {/* Social links */}
           <div className="mt-8 flex items-center justify-center gap-5 text-white/80">
             <a 
               className="hover:text-white transition" 
@@ -792,15 +782,12 @@ const Hero3D = () => {
             >
               <Mail className="h-5 w-5" />
             </a>
-            <a className="hover:text-white transition" href="https://github.com/NarNeil" target="_blank" rel="noreferrer">
+            <a className="hover:text-white transition" href="https://github.com/NarNeil" target="_blank" rel="noopener noreferrer">
               <Github className="h-5 w-5" />
             </a>
-            <a className="hover:text-white transition" href="https://linkedin.com/in/nnarnoli" target="_blank" rel="noreferrer">
+            <a className="hover:text-white transition" href="https://linkedin.com/in/nnarnoli" target="_blank" rel="noopener noreferrer">
               <Linkedin className="h-5 w-5" />
             </a>
-            <span className="inline-flex items-center gap-2 text-sm rounded-full border border-white/15 px-3 py-1.5">
-              <Trophy className="h-4 w-4" /> SoftSpark Hackathon Winner
-            </span>
           </div>
           
           {/* Gradient effects */}
@@ -870,7 +857,7 @@ const Projects = () => (
                 
                 {/* External links */}
                 <div className="mt-4 flex items-center gap-3">
-                  <a href={p.links.repo} className="inline-flex items-center gap-1 text-sm hover:underline">Code <Github className="h-4 w-4" /></a>
+                  <a href={p.links.repo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm hover:underline">Code <Github className="h-4 w-4" /></a>
                 </div>
               </div>
             </GlassCard>
@@ -1135,8 +1122,8 @@ const Contact = () => (
             {/* Social media links */}
             <div className="mt-5 flex flex-wrap items-center gap-3 text-white/90">
               <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="mailto:narnoli.neil@gmail.com"><Mail className="h-4 w-4"/> narnoli.neil@gmail.com</a>
-              <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="https://github.com/NarNeil" target="_blank" rel="noreferrer"><Github className="h-4 w-4"/> GitHub</a>
-              <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="https://linkedin.com/in/nnarnoli" target="_blank" rel="noreferrer"><Linkedin className="h-4 w-4"/> LinkedIn</a>
+              <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="https://github.com/NarNeil" target="_blank" rel="noopener noreferrer"><Github className="h-4 w-4"/> GitHub</a>
+              <a className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-2" href="https://linkedin.com/in/nnarnoli" target="_blank" rel="noopener noreferrer"><Linkedin className="h-4 w-4"/> LinkedIn</a>
             </div>
           </div>
           
@@ -1178,9 +1165,9 @@ const Footer = () => (
       
       {/* Quick navigation links */}
       <div className="flex items-center gap-4">
-        <a className="hover:text-white" href="#home">Home</a>
-        <a className="hover:text-white" href="#projects">Projects</a>
-        <a className="hover:text-white" href="#contact">Contact</a>
+        <a className="hover:text-white transition" href="#home">Home</a>
+        <a className="hover:text-white transition" href="#projects">Projects</a>
+        <a className="hover:text-white transition" href="#contact">Contact</a>
       </div>
     </div>
   </footer>
@@ -1448,6 +1435,19 @@ function FrameUpdater({ onFrame }) {
 export default function PortfolioSite() {
   // Track which section is currently active for particle color changes
   const active = useActiveSection(["home", "projects", "experience", "build", "education", "contact"]);
+  
+  // Update CSS variable for site-wide scrollbar color based on active section
+  React.useEffect(() => {
+    const colorMap = {
+      home: 'rgba(139, 92, 246, 0.6)',
+      projects: 'rgba(59, 130, 246, 0.6)',
+      experience: 'rgba(236, 72, 153, 0.6)',
+      build: 'rgba(234, 179, 8, 0.6)',
+      education: 'rgba(34, 197, 94, 0.6)',
+      contact: 'rgba(249, 115, 22, 0.6)'
+    };
+    document.documentElement.style.setProperty('--scrollbar-color', colorMap[active] || colorMap.home);
+  }, [active]);
   
   return (
     <div className="min-h-screen bg-[#0f0f16] text-white selection:bg-indigo-500/40">
